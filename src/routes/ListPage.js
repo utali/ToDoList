@@ -27,15 +27,17 @@ import {
 export default class ListPage extends Component {
 
   state = {}
-
-  /**@description 点击添加任务
+  /**
+   * @description 点击添加任务
    */
   addTask = () => {
     this.props.goAddPage();
   }
-  /**@description 删除任务
-   * @param index 需要删除的任务下标
+  /**
+   * @description
+   * @param
    */
+
   remove = (index) => {
     const { dispatch, task: { taskList } } = this.props;
     taskList.splice(index, 1);
@@ -46,7 +48,8 @@ export default class ListPage extends Component {
       }
     })
   }
-  /**@description 编辑任务
+  /**
+   * @description 编辑任务
    * @param index 需要编辑的任务下标
    */
   edit = (index) => {
@@ -60,7 +63,8 @@ export default class ListPage extends Component {
     });
     this.addTask()
   }
-  /**@description 将任务标记为完成
+  /**
+   * @description 将任务标记为完成
    * @param index 需要标记的任务下标
    */
   completed = (index) => {

@@ -37,12 +37,14 @@ export default class AddPage extends Component{
     this.selectedSign();
   }
 
-  /**@description 返回首页
+  /**
+   * @description 返回首页
    */
   goBack = () => {
     this.props.goBack();
   }
-  /**@description 保存任务
+  /**
+   * @description 保存任务
    */
   save = () => {
     const { validateFields } = this.formRef.current;
@@ -71,14 +73,16 @@ export default class AddPage extends Component{
       this.goBack();
     })
   };
-  /**@description 对任务列表进行排序
+  /**
+   * @description 对任务列表进行排序
    * @param list 需要排序的列表
    */
   sortTask = (list) => {
     if (list.length < 2) return list;
     return list.sort((a,b) => b.time - a.time)
   }
-  /**@description 切换任务标记
+  /**
+   * @description 切换任务标记
    * @param index 选择的colorList下标
    */
   selectedSign = (index) => {
