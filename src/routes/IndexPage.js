@@ -20,7 +20,9 @@ export default class IndexPage extends Component {
     listPage: true
   }
 
-  //将任务标记为完成
+  /**@description 将任务标记为完成
+   * @param index 需要标记的任务下标
+   */
   completed = (index) => {
     const { dispatch, task: { taskList } } = this.props;
     taskList[index].completed = true;
@@ -31,7 +33,9 @@ export default class IndexPage extends Component {
       }
     });
   }
-  //选择日期改变
+  /**@description 选择日期改变
+   * @param value 选择的日期值moment类型
+   */
   onPanelChange = (value) => {
     this.props.dispatch({
       type: 'task/save',

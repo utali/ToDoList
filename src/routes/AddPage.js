@@ -1,3 +1,5 @@
+/** create by liqiaoqiao 2020-05-12 */
+
 import React, {Fragment, Component} from 'react';
 import {connect} from 'dva';
 import {
@@ -35,11 +37,13 @@ export default class AddPage extends Component{
     this.selectedSign();
   }
 
-  //返回首页
+  /**@description 返回首页
+   */
   goBack = () => {
     this.props.goBack();
   }
-  //保存任务
+  /**@description 保存任务
+   */
   save = () => {
     const { validateFields } = this.formRef.current;
     const { signValue } = this.state;
@@ -67,12 +71,16 @@ export default class AddPage extends Component{
       this.goBack();
     })
   };
-  //对任务列表进行排序
+  /**@description 对任务列表进行排序
+   * @param list 需要排序的列表
+   */
   sortTask = (list) => {
     if (list.length < 2) return list;
     return list.sort((a,b) => b.time - a.time)
   }
-  //切换任务标记
+  /**@description 切换任务标记
+   * @param index 选择的colorList下标
+   */
   selectedSign = (index) => {
     const { task: {colorList} } = this.props;
     colorList.map(item => item.action = false);

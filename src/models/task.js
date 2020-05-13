@@ -1,12 +1,13 @@
+/** create by liqiaoqiao 2020-05-13 */
 
 export default {
 
   namespace: 'task',
 
   state: {
-    listPage: true,
-    selectedDate: new Date().toLocaleDateString(),
-    taskIndex: undefined,
+    listPage: true, //是否为列表页
+    selectedDate: new Date().toLocaleDateString(), //选择的日期
+    taskIndex: undefined, //当前任务下标
     taskList: [
       {
         taskName: '吃饭',
@@ -34,7 +35,7 @@ export default {
     }, {
       color: 'gray',
       value: 3
-    }],
+    }], //标记列表
   },
 
   subscriptions: {

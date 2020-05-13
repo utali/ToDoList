@@ -1,3 +1,5 @@
+/** create by liqiaoqiao 2020-05-13 */
+
 import React, {Fragment, Component} from 'react';
 import {connect} from 'dva';
 import {
@@ -26,11 +28,14 @@ export default class ListPage extends Component {
 
   state = {}
 
-  //点击添加任务
+  /**@description 点击添加任务
+   */
   addTask = () => {
     this.props.goAddPage();
   }
-  //删除任务
+  /**@description 删除任务
+   * @param index 需要删除的任务下标
+   */
   remove = (index) => {
     const { dispatch, task: { taskList } } = this.props;
     taskList.splice(index, 1);
@@ -41,7 +46,9 @@ export default class ListPage extends Component {
       }
     })
   }
-  //编辑任务
+  /**@description 编辑任务
+   * @param index 需要编辑的任务下标
+   */
   edit = (index) => {
     const { dispatch, task: { taskList } } = this.props;
     dispatch({
@@ -53,7 +60,9 @@ export default class ListPage extends Component {
     });
     this.addTask()
   }
-  //将任务标记为完成
+  /**@description 将任务标记为完成
+   * @param index 需要标记的任务下标
+   */
   completed = (index) => {
     const { dispatch, task: { taskList } } = this.props;
     taskList[index].completed = true;
