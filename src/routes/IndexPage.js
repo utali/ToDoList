@@ -1,86 +1,73 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, Component} from 'react';
 import {connect} from 'dva';
-import { routerRedux } from 'dva/router';
 import {
-  Calendar,
   Row,
   Col,
-  Timeline,
-  Button,
-  Affix
+  Calendar
 } from 'antd';
-import moment from 'moment';
 import styles from './IndexPage.css';
-import {ClockCircleOutlined, PlusOutlined} from '@ant-design/icons';
+import AddPage from './AddPage';
+import ListPage from './ListPage';
 
-let list = [
-  {
-    content: [
-      'Create a services site34',
-      'Create a services sitedfsdfsdf',
-      'Create a services sitegjhkghjgh'
-    ],
-    deadline: '2015-09-01 12:00'
-  },
-  {
-    content: [
-      'Create a services site34',
-      'Create a services sitedfsdfsdf',
-      'Create a services sitegjhkghjgh'
-    ],
-    deadline: '2015-09-01 13:15'
-  },
-  {
-    content: [
-      'Create a services site34',
-      'Create a services sitedfsdfsdf',
-      'Create a services sitegjhkghjgh'
-    ],
-    deadline: '2015-09-01 15:59'
+@connect(({task}) => {
+  return {
+    task
   }
-];
+})
+export default class IndexPage extends Component {
 
-const IndexPage = ({dispatch}) => {
-  //点击添加任务
-  function addTask() {
-    dispatch(routerRedux.push('/add'))
+  state = {
+    listPage: true
   }
 
-  return <Fragment>
-    <div className={styles.content_title}>任务列表</div>
-    <div className={styles.right_line}>
-      <Timeline>
-        {
-          list.map((item, index) =>
-            <Timeline.Item
-              color="green"
-              dot={<ClockCircleOutlined className="timeline-clock-icon"/>}
-            >
-              <div style={{marginBottom: 10}}>
-                {
-                  moment(item.deadline).format('HH:mm')
-                }
-              </div>
-              {
-                item.content.map((item, index) => <div style={{marginBottom: 5}}>
-                  {item}
-                </div>)
-              }
-            </Timeline.Item>)
-        }
-      </Timeline>
-    </div>
-    <Affix offsetBottom={120}>
-      <Button
-        type="primary"
-        icon={<PlusOutlined/>}
-        style={{float: "right", marginRight: '10%'}}
-        onClick={addTask}
-      >添加任务</Button>
-    </Affix>
-  </Fragment>
+  //将任务标记为完成
+  completed = (index) => {
+    const { dispatch, task: { taskList } } = this.props;
+    taskList[index].completed = true;
+    dispatch({
+      type: 'task/save',
+      payload: {
+        taskList
+      }
+    });
+  }
+  //选择日期改变
+  onPanelChange = (value) => {
+    this.props.dispatch({
+      type: 'task/save',
+      payload: {
+        selectedDate: new Date(value.valueOf()).toLocaleDateString()
+      }
+    })
+  }
+
+  render() {
+    const {listPage} = this.state;
+
+    return <Fragment>
+      <Row gutter={12}>
+        <Col span={10} offset={1}>
+          <div className={styles.content_title}>日历</div>
+          <div className={styles.calendar_line}>
+            <Calendar fullscreen={false} onPanelChange={this.onPanelChange}/>
+          </div>
+        </Col>
+        <Col span={11} offset={1}>
+          {
+            listPage
+              ? <ListPage
+              listPage={listPage}
+              goAddPage={() => this.setState({listPage: false})}
+            />
+            : <AddPage
+                listPage={listPage}
+                goBack={() => this.setState({listPage: true})}
+              />
+          }
+        </Col>
+      </Row>
+    </Fragment>
+  }
 }
 
-IndexPage.propTypes = {};
-
-export default connect()(IndexPage);
+ListPage.propTypes = {};
