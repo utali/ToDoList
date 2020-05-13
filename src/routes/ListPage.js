@@ -77,7 +77,6 @@ export default class ListPage extends Component {
           }
           {
             taskList.map((item, index) => {
-              console.log(item.sign, colorList[item.sign]);
               return <Fragment key={index}>
                 {
                   item.completed
