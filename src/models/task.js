@@ -17,7 +17,7 @@ export default {
       {
         taskName: '打卡',
         time: 1589340659000,
-        description: '叮咚！上班时间到，记得打卡，不要吃到哟！',
+        description: '叮咚！上班时间到，记得打卡，不要迟到哟！',
         sign: 3,
       },
     ], //任务列表
